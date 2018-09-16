@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=DarkPayCoin
+Comment=DarkPayCoin P2P Cryptocurrency
+Comment[fr]=DarkPayCoin, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=DarkPayCoin, eşten eşe kriptografik sanal para birimi
+Exec=darkpaycoin-qt %u
+Terminal=false
+Type=Application
+Icon=darkpaycoin128
+MimeType=x-scheme-handler/darkpaycoin;
+Categories=Office;Finance;
