@@ -106,46 +106,46 @@
     </message>
 </context>
 <context>
-    <name>AskPassdkpcaseDialog</name>
+    <name>AskPassphraseDialog</name>
     <message>
-        <source>Enter passdkpcase</source>
-        <translation>Entrer la dkpcase secrète</translation>
+        <source>Enter passphrase</source>
+        <translation>Entrer la phrase secrète</translation>
     </message>
     <message>
-        <source>New passdkpcase</source>
-        <translation>Nouvelle dkpcase secrète</translation>
+        <source>New passphrase</source>
+        <translation>Nouvelle phrase secrète</translation>
     </message>
     <message>
-        <source>Repeat new passdkpcase</source>
-        <translation>Confirmer la nouvelle dkpcase secrète</translation>
+        <source>Repeat new passphrase</source>
+        <translation>Confirmer la nouvelle phrase secrète</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
         <translation>Crypter le portefeuille</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passdkpcase to unlock the wallet.</source>
-        <translation>Cette opération requiert votre dkpcase secrète pour déverrouiller votre portefeuille.</translation>
+        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
+        <translation>Cette opération requiert votre phrase secrète pour déverrouiller votre portefeuille.</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
         <translation>Déverrouiller le portefeuille</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passdkpcase to decrypt the wallet.</source>
-        <translation>Cette opération nécessite votre dkpcase secrète de portefeuille pour décrypter le portefeuille </translation>
+        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
+        <translation>Cette opération nécessite votre phrase secrète de portefeuille pour décrypter le portefeuille </translation>
     </message>
     <message>
         <source>Decrypt wallet</source>
         <translation>Décrypter le portefeuille</translation>
     </message>
     <message>
-        <source>Change passdkpcase</source>
-        <translation>Changer la dkpcase secrète</translation>
+        <source>Change passphrase</source>
+        <translation>Changer la phrase secrète</translation>
     </message>
     <message>
-        <source>Enter the old and new passdkpcase to the wallet.</source>
-        <translation>Entrer l'ancienne et la nouvelle dkpcase secrète dans le portefeuille</translation>
+        <source>Enter the old and new passphrase to the wallet.</source>
+        <translation>Entrer l'ancienne et la nouvelle phrase secrète dans le portefeuille</translation>
     </message>
     <message>
         <source>Confirm wallet encryption</source>
@@ -160,8 +160,8 @@
         <translation>Êtes-vous sûr de vouloir crypter votre portefeuille?</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passdkpcase, you will &lt;b&gt;LOSE ALL OF YOUR DKPC&lt;/b&gt;!</source>
-        <translation>Attention : si vous cryptez votre portefeuille et perdez votre dkpcase secrète, vous &lt;b&gt;PERDREZ TOUS VOS DKPC&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR DKPC&lt;/b&gt;!</source>
+        <translation>Attention : si vous cryptez votre portefeuille et perdez votre phrase secrète, vous &lt;b&gt;PERDREZ TOUS VOS DKPC&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Wallet encrypted</source>
@@ -176,24 +176,24 @@
         <translation>Le cryptage du portefeuille a échoué en raison d'une erreur interne. Votre portefeuille n'a pas été crypté.</translation>
     </message>
     <message>
-        <source>The supplied passdkpcases do not match.</source>
-        <translation>Les dkpcases secrètes fournies ne correspondent pas.</translation>
+        <source>The supplied passphrases do not match.</source>
+        <translation>Les phrases secrètes fournies ne correspondent pas.</translation>
     </message>
     <message>
         <source>Wallet unlock failed</source>
         <translation>Le déverrouillage de votre portefeuille a échoué</translation>
     </message>
     <message>
-        <source>The passdkpcase entered for the wallet decryption was incorrect.</source>
-        <translation>La dkpcase secrète entrée pour le décryptage de votre portefeuille était incorrecte.</translation>
+        <source>The passphrase entered for the wallet decryption was incorrect.</source>
+        <translation>La phrase secrète entrée pour le décryptage de votre portefeuille était incorrecte.</translation>
     </message>
     <message>
         <source>Wallet decryption failed</source>
         <translation>Le décryptage de votre portefeuille a échoué.</translation>
     </message>
     <message>
-        <source>Wallet passdkpcase was successfully changed.</source>
-        <translation>La dkpcase secrète de votre portefeuille a été changée avec succès.</translation>
+        <source>Wallet passphrase was successfully changed.</source>
+        <translation>La phrase secrète de votre portefeuille a été changée avec succès.</translation>
     </message>
     <message>
         <source>Warning: The Caps Lock key is on!</source>
@@ -211,8 +211,8 @@
         <translation>BIP 38 crypter</translation>
     </message>
     <message>
-        <source>Enter a DarkPayCoin Address that you would like to encrypt using BIP 38. Enter a passdkpcase in the middle box. Press encrypt to compute the encrypted private key.</source>
-        <translation>Entrez une adresse DarkPayCoin que vous voulez crypter en utilisant BIP 38. Entrez une dkpcase secrète dans le champ du milieu. Cliquez sur crypter pour calculer la clé de cryptage privée.</translation>
+        <source>Enter a DarkPayCoin Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
+        <translation>Entrez une adresse DarkPayCoin que vous voulez crypter en utilisant BIP 38. Entrez une phrase secrète dans le champ du milieu. Cliquez sur crypter pour calculer la clé de cryptage privée.</translation>
     </message>
     <message>
         <source>Address:</source>
@@ -239,7 +239,7 @@
         <translation>Alt+P</translation>
     </message>
     <message>
-        <source>Passdkpcase: </source>
+        <source>Passphrase: </source>
         <translation>Dkpcase secrète :</translation>
     </message>
     <message>
@@ -295,8 +295,8 @@
         <translation>Cliquez sur "Décrypter la clé" pour calculer la clé</translation>
     </message>
     <message>
-        <source>The entered passdkpcase is invalid. </source>
-        <translation>La dkpcase secrète entrée est incorrect.</translation>
+        <source>The entered passphrase is invalid. </source>
+        <translation>La phrase secrète entrée est incorrect.</translation>
     </message>
     <message>
         <source>Allowed: 0-9,a-z,A-Z,</source>
@@ -327,8 +327,8 @@
         <translation>Échec du décryptage.</translation>
     </message>
     <message>
-        <source>Please check the key and passdkpcase and try again.</source>
-        <translation>Veuillez vérifier la clé et la dkpcase secrète et réessayer.</translation>
+        <source>Please check the key and passphrase and try again.</source>
+        <translation>Veuillez vérifier la clé et la phrase secrète et réessayer.</translation>
     </message>
     <message>
         <source>Data Not Valid.</source>
@@ -422,12 +422,12 @@
         <translation>Sauvegarder ailleurs le portefeuille </translation>
     </message>
     <message>
-        <source>&amp;Change Passdkpcase...</source>
-        <translation>Changer la dkpcase de sécurité...</translation>
+        <source>&amp;Change Passphrase...</source>
+        <translation>Changer la phrase de sécurité...</translation>
     </message>
     <message>
-        <source>Change the passdkpcase used for wallet encryption</source>
-        <translation>Changer la dkpcase secrète utilisée pour l'encryptage du portefeuille</translation>
+        <source>Change the passphrase used for wallet encryption</source>
+        <translation>Changer la phrase secrète utilisée pour l'encryptage du portefeuille</translation>
     </message>
     <message>
         <source>&amp;Unlock Wallet...</source>
@@ -562,8 +562,8 @@
         <translation>Outil BIP38</translation>
     </message>
     <message>
-        <source>Encrypt and decrypt private keys using a passdkpcase</source>
-        <translation>Crypter et décrypter les clés privées en utilisant une dkpcase secrète</translation>
+        <source>Encrypt and decrypt private keys using a passphrase</source>
+        <translation>Crypter et décrypter les clés privées en utilisant une phrase secrète</translation>
     </message>
     <message>
         <source>Synchronizing with network...</source>

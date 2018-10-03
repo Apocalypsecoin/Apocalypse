@@ -4,8 +4,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "askpassdkpcasedialog.h"
-#include "ui_askpassdkpcasedialog.h"
+#include "askpassphrasedialog.h"
+#include "ui_askpassphrasedialog.h"
 
 #include "guiconstants.h"
 #include "guiutil.h"
@@ -17,8 +17,8 @@
 #include <QMessageBox>
 #include <QPushButton>
 
-AskPassdkpcaseDialog::AskPassdkpcaseDialog(Mode mode, QWidget* parent, WalletModel* model) : QDialog(parent),
-                                                                                           ui(new Ui::AskPassdkpcaseDialog),
+AskPassphraseDialog::AskPassphraseDialog(Mode mode, QWidget* parent, WalletModel* model) : QDialog(parent),
+                                                                                           ui(new Ui::AskPassphraseDialog),
                                                                                            mode(mode),
                                                                                            model(model),
                                                                                            fCapsLock(false)
@@ -42,8 +42,8 @@ AskPassdkpcaseDialog::AskPassdkpcaseDialog(Mode mode, QWidget* parent, WalletMod
     this->model = model;
 
     switch (mode) {
-    case Encrypt: // Ask passdkpcase x2
-        ui->warningLabel->setText(tr("Enter the new passdkpcase to the wallet.<br/>Please use a passdkpcase of <b>ten or more random characters</b>, or <b>eight or more words</b>."));
+    case Encrypt: // Ask passphrase x2
+        ui->warningLabel->setText(tr("Enter the new passphrase to the wallet.<br/>Please use a passphrase of <b>ten or more random characters</b>, or <b>eight or more words</b>."));
         ui->passLabel1->hide();
         ui->passEdit1->hide();
         setWindowTitle(tr("Encrypt wallet"));
@@ -51,25 +51,25 @@ AskPassdkpcaseDialog::AskPassdkpcaseDialog(Mode mode, QWidget* parent, WalletMod
     case UnlockAnonymize:
         ui->anonymizationCheckBox->setChecked(true);
         ui->anonymizationCheckBox->show();
-    case Unlock: // Ask passdkpcase
-        ui->warningLabel->setText(tr("This operation needs your wallet passdkpcase to unlock the wallet."));
+    case Unlock: // Ask passphrase
+        ui->warningLabel->setText(tr("This operation needs your wallet passphrase to unlock the wallet."));
         ui->passLabel2->hide();
         ui->passEdit2->hide();
         ui->passLabel3->hide();
         ui->passEdit3->hide();
         setWindowTitle(tr("Unlock wallet"));
         break;
-    case Decrypt: // Ask passdkpcase
-        ui->warningLabel->setText(tr("This operation needs your wallet passdkpcase to decrypt the wallet."));
+    case Decrypt: // Ask passphrase
+        ui->warningLabel->setText(tr("This operation needs your wallet passphrase to decrypt the wallet."));
         ui->passLabel2->hide();
         ui->passEdit2->hide();
         ui->passLabel3->hide();
         ui->passEdit3->hide();
         setWindowTitle(tr("Decrypt wallet"));
         break;
-    case ChangePass: // Ask old passdkpcase + new passdkpcase x2
-        setWindowTitle(tr("Change passdkpcase"));
-        ui->warningLabel->setText(tr("Enter the old and new passdkpcase to the wallet."));
+    case ChangePass: // Ask old passphrase + new passphrase x2
+        setWindowTitle(tr("Change passphrase"));
+        ui->warningLabel->setText(tr("Enter the old and new passphrase to the wallet."));
         break;
     }
 
@@ -81,7 +81,7 @@ AskPassdkpcaseDialog::AskPassdkpcaseDialog(Mode mode, QWidget* parent, WalletMod
     connect(ui->passEdit3, SIGNAL(textChanged(QString)), this, SLOT(textChanged()));
 }
 
-AskPassdkpcaseDialog::~AskPassdkpcaseDialog()
+AskPassphraseDialog::~AskPassphraseDialog()
 {
     // Attempt to overwrite text so that they do not linger around in memory
     ui->passEdit1->setText(QString(" ").repeated(ui->passEdit1->text().size()));
@@ -90,7 +90,7 @@ AskPassdkpcaseDialog::~AskPassdkpcaseDialog()
     delete ui;
 }
 
-void AskPassdkpcaseDialog::accept()
+void AskPassphraseDialog::accept()
 {
     SecureString oldpass, newpass1, newpass2;
     if (!model)
@@ -107,11 +107,11 @@ void AskPassdkpcaseDialog::accept()
     switch (mode) {
     case Encrypt: {
         if (newpass1.empty() || newpass2.empty()) {
-            // Cannot encrypt with empty passdkpcase
+            // Cannot encrypt with empty passphrase
             break;
         }
         QMessageBox::StandardButton retval = QMessageBox::question(this, tr("Confirm wallet encryption"),
-            tr("Warning: If you encrypt your wallet and lose your passdkpcase, you will <b>LOSE ALL OF YOUR DKPC</b>!") + "<br><br>" + tr("Are you sure you wish to encrypt your wallet?"),
+            tr("Warning: If you encrypt your wallet and lose your passphrase, you will <b>LOSE ALL OF YOUR DKPC</b>!") + "<br><br>" + tr("Are you sure you wish to encrypt your wallet?"),
             QMessageBox::Yes | QMessageBox::Cancel,
             QMessageBox::Cancel);
         if (retval == QMessageBox::Yes) {
@@ -136,7 +136,7 @@ void AskPassdkpcaseDialog::accept()
                 QDialog::accept(); // Success
             } else {
                 QMessageBox::critical(this, tr("Wallet encryption failed"),
-                    tr("The supplied passdkpcases do not match."));
+                    tr("The supplied passphrases do not match."));
             }
         } else {
             QDialog::reject(); // Cancelled
@@ -146,7 +146,7 @@ void AskPassdkpcaseDialog::accept()
     case Unlock:
         if (!model->setWalletLocked(false, oldpass, ui->anonymizationCheckBox->isChecked())) {
             QMessageBox::critical(this, tr("Wallet unlock failed"),
-                tr("The passdkpcase entered for the wallet decryption was incorrect."));
+                tr("The passphrase entered for the wallet decryption was incorrect."));
         } else {
             QDialog::accept(); // Success
         }
@@ -154,50 +154,50 @@ void AskPassdkpcaseDialog::accept()
     case Decrypt:
         if (!model->setWalletEncrypted(false, oldpass)) {
             QMessageBox::critical(this, tr("Wallet decryption failed"),
-                tr("The passdkpcase entered for the wallet decryption was incorrect."));
+                tr("The passphrase entered for the wallet decryption was incorrect."));
         } else {
             QDialog::accept(); // Success
         }
         break;
     case ChangePass:
         if (newpass1 == newpass2) {
-            if (model->changePassdkpcase(oldpass, newpass1)) {
+            if (model->changePassphrase(oldpass, newpass1)) {
                 QMessageBox::information(this, tr("Wallet encrypted"),
-                    tr("Wallet passdkpcase was successfully changed."));
+                    tr("Wallet passphrase was successfully changed."));
                 QDialog::accept(); // Success
             } else {
                 QMessageBox::critical(this, tr("Wallet encryption failed"),
-                    tr("The passdkpcase entered for the wallet decryption was incorrect."));
+                    tr("The passphrase entered for the wallet decryption was incorrect."));
             }
         } else {
             QMessageBox::critical(this, tr("Wallet encryption failed"),
-                tr("The supplied passdkpcases do not match."));
+                tr("The supplied passphrases do not match."));
         }
         break;
     }
 }
 
-void AskPassdkpcaseDialog::textChanged()
+void AskPassphraseDialog::textChanged()
 {
     // Validate input, set Ok button to enabled when acceptable
     bool acceptable = false;
     switch (mode) {
-    case Encrypt: // New passdkpcase x2
+    case Encrypt: // New passphrase x2
         acceptable = !ui->passEdit2->text().isEmpty() && !ui->passEdit3->text().isEmpty();
         break;
-    case UnlockAnonymize: // Old passdkpcase x1
-    case Unlock:          // Old passdkpcase x1
+    case UnlockAnonymize: // Old passphrase x1
+    case Unlock:          // Old passphrase x1
     case Decrypt:
         acceptable = !ui->passEdit1->text().isEmpty();
         break;
-    case ChangePass: // Old passdkpcase x1, new passdkpcase x2
+    case ChangePass: // Old passphrase x1, new passphrase x2
         acceptable = !ui->passEdit1->text().isEmpty() && !ui->passEdit2->text().isEmpty() && !ui->passEdit3->text().isEmpty();
         break;
     }
     ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(acceptable);
 }
 
-bool AskPassdkpcaseDialog::event(QEvent* event)
+bool AskPassphraseDialog::event(QEvent* event)
 {
     // Detect Caps Lock key press.
     if (event->type() == QEvent::KeyPress) {
@@ -214,7 +214,7 @@ bool AskPassdkpcaseDialog::event(QEvent* event)
     return QWidget::event(event);
 }
 
-bool AskPassdkpcaseDialog::eventFilter(QObject* object, QEvent* event)
+bool AskPassphraseDialog::eventFilter(QObject* object, QEvent* event)
 {
     /* Detect Caps Lock.
      * There is no good OS-independent way to check a key state in Qt, but we

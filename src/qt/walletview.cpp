@@ -5,7 +5,7 @@
 #include "walletview.h"
 
 #include "addressbookpage.h"
-#include "askpassdkpcasedialog.h"
+#include "askpassphrasedialog.h"
 #include "bip38tooldialog.h"
 #include "bitcoingui.h"
 #include "blockexplorer.h"
@@ -211,7 +211,7 @@ void WalletView::setWalletModel(WalletModel* walletModel)
         connect(walletModel->getTransactionTableModel(), SIGNAL(rowsInserted(QModelIndex, int, int)),
             this, SLOT(processNewTransaction(QModelIndex, int, int)));
 
-        // Ask for passdkpcase if needed
+        // Ask for passphrase if needed
         connect(walletModel, SIGNAL(requireUnlock()), this, SLOT(unlockWallet()));
 
         // Show progress dialog
@@ -349,7 +349,7 @@ void WalletView::encryptWallet(bool status)
 {
     if (!walletModel)
         return;
-    AskPassdkpcaseDialog dlg(status ? AskPassdkpcaseDialog::Encrypt : AskPassdkpcaseDialog::Decrypt, this, walletModel);
+    AskPassphraseDialog dlg(status ? AskPassphraseDialog::Encrypt : AskPassphraseDialog::Decrypt, this, walletModel);
     dlg.exec();
 
     updateEncryptionStatus();
@@ -373,9 +373,9 @@ void WalletView::backupWallet()
     }
 }
 
-void WalletView::changePassdkpcase()
+void WalletView::changePassphrase()
 {
-    AskPassdkpcaseDialog dlg(AskPassdkpcaseDialog::ChangePass, this, walletModel);
+    AskPassphraseDialog dlg(AskPassphraseDialog::ChangePass, this, walletModel);
     dlg.exec();
 }
 
@@ -386,7 +386,7 @@ void WalletView::unlockWallet()
     // Unlock wallet when requested by wallet model
 
     if (walletModel->getEncryptionStatus() == WalletModel::Locked || walletModel->getEncryptionStatus() == WalletModel::UnlockedForAnonymizationOnly) {
-        AskPassdkpcaseDialog dlg(AskPassdkpcaseDialog::UnlockAnonymize, this, walletModel);
+        AskPassphraseDialog dlg(AskPassphraseDialog::UnlockAnonymize, this, walletModel);
         dlg.exec();
     }
 }
@@ -408,7 +408,7 @@ void WalletView::toggleLockWallet()
 
     // Unlock the wallet when requested
     if (encStatus == walletModel->Locked) {
-        AskPassdkpcaseDialog dlg(AskPassdkpcaseDialog::UnlockAnonymize, this, walletModel);
+        AskPassphraseDialog dlg(AskPassphraseDialog::UnlockAnonymize, this, walletModel);
         dlg.exec();
     }
 

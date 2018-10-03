@@ -36,15 +36,15 @@ using namespace boost::assign;
 int64_t nWalletUnlockTime;
 static CCriticalSection cs_nWalletUnlockTime;
 
-std::string HelpRequiringPassdkpcase()
+std::string HelpRequiringPassphrase()
 {
-    return pwalletMain && pwalletMain->IsCrypted() ? "\nRequires wallet passdkpcase to be set with walletpassdkpcase call." : "";
+    return pwalletMain && pwalletMain->IsCrypted() ? "\nRequires wallet passphrase to be set with walletpassphrase call." : "";
 }
 
 void EnsureWalletIsUnlocked(bool fAllowAnonOnly)
 {
     if (pwalletMain->IsLocked() || (!fAllowAnonOnly && pwalletMain->fWalletUnlockAnonymizeOnly))
-        throw JSONRPCError(RPC_WALLET_UNLOCK_NEEDED, "Error: Please enter the wallet passdkpcase with walletpassdkpcase first.");
+        throw JSONRPCError(RPC_WALLET_UNLOCK_NEEDED, "Error: Please enter the wallet passphrase with walletpassphrase first.");
 }
 
 void WalletTxToJSON(const CWalletTx& wtx, UniValue& entry)
@@ -364,7 +364,7 @@ UniValue sendtoaddress(const UniValue& params, bool fHelp)
         throw runtime_error(
             "sendtoaddress \"darkpaycoinaddress\" amount ( \"comment\" \"comment-to\" )\n"
             "\nSend an amount to a given address. The amount is a real and is rounded to the nearest 0.00000001\n" +
-            HelpRequiringPassdkpcase() +
+            HelpRequiringPassphrase() +
             "\nArguments:\n"
             "1. \"darkpaycoinaddress\"  (string, required) The darkpaycoin address to send to.\n"
             "2. \"amount\"      (numeric, required) The amount in darkpaycoin to send. e.g. 0.1\n"
@@ -408,7 +408,7 @@ UniValue sendtoaddressix(const UniValue& params, bool fHelp)
         throw runtime_error(
             "sendtoaddressix \"darkpaycoinaddress\" amount ( \"comment\" \"comment-to\" )\n"
             "\nSend an amount to a given address. The amount is a real and is rounded to the nearest 0.00000001\n" +
-            HelpRequiringPassdkpcase() +
+            HelpRequiringPassphrase() +
             "\nArguments:\n"
             "1. \"darkpaycoinaddress\"  (string, required) The darkpaycoin address to send to.\n"
             "2. \"amount\"      (numeric, required) The  to send. e.g. 0.1\n"
@@ -496,7 +496,7 @@ UniValue signmessage(const UniValue& params, bool fHelp)
         throw runtime_error(
             "signmessage \"darkpaycoinaddress\" \"message\"\n"
             "\nSign a message with the private key of an address" +
-            HelpRequiringPassdkpcase() + "\n"
+            HelpRequiringPassphrase() + "\n"
                                         "\nArguments:\n"
                                         "1. \"darkpaycoinaddress\"  (string, required) The darkpaycoin address to use for the private key.\n"
                                         "2. \"message\"         (string, required) The message to create a signature of.\n"
@@ -504,7 +504,7 @@ UniValue signmessage(const UniValue& params, bool fHelp)
                                         "\"signature\"          (string) The signature of the message encoded in base 64\n"
                                         "\nExamples:\n"
                                         "\nUnlock the wallet for 30 seconds\n" +
-            HelpExampleCli("walletpassdkpcase", "\"mypassdkpcase\" 30") +
+            HelpExampleCli("walletpassphrase", "\"mypassphrase\" 30") +
             "\nCreate the signature\n" + HelpExampleCli("signmessage", "\"XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg\" \"my message\"") +
             "\nVerify the signature\n" + HelpExampleCli("verifymessage", "\"XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg\" \"signature\" \"my message\"") +
             "\nAs json rpc\n" + HelpExampleRpc("signmessage", "\"XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg\", \"my message\""));
@@ -823,7 +823,7 @@ UniValue sendfrom(const UniValue& params, bool fHelp)
             "sendfrom \"fromaccount\" \"todarkpaycoinaddress\" amount ( minconf \"comment\" \"comment-to\" )\n"
             "\nSent an amount from an account to a darkpaycoin address.\n"
             "The amount is a real and is rounded to the nearest 0.00000001." +
-            HelpRequiringPassdkpcase() + "\n"
+            HelpRequiringPassphrase() + "\n"
                                         "\nArguments:\n"
                                         "1. \"fromaccount\"       (string, required) The name of the account to send funds from. May be the default account using \"\".\n"
                                         "2. \"todarkpaycoinaddress\"  (string, required) The darkpaycoin address to send funds to.\n"
@@ -880,7 +880,7 @@ UniValue sendmany(const UniValue& params, bool fHelp)
         throw runtime_error(
             "sendmany \"fromaccount\" {\"address\":amount,...} ( minconf \"comment\" )\n"
             "\nSend multiple times. Amounts are double-precision floating point numbers." +
-            HelpRequiringPassdkpcase() + "\n"
+            HelpRequiringPassphrase() + "\n"
                                         "\nArguments:\n"
                                         "1. \"fromaccount\"         (string, required) The account to send the funds from, can be \"\" for the default account\n"
                                         "2. \"amounts\"             (string, required) A json object with addresses and amounts\n"
@@ -1764,7 +1764,7 @@ UniValue keypoolrefill(const UniValue& params, bool fHelp)
         throw runtime_error(
             "keypoolrefill ( newsize )\n"
             "\nFills the keypool." +
-            HelpRequiringPassdkpcase() + "\n"
+            HelpRequiringPassphrase() + "\n"
                                         "\nArguments\n"
                                         "1. newsize     (numeric, optional, default=100) The new keypool size\n"
                                         "\nExamples:\n" +
@@ -1798,35 +1798,35 @@ static void LockWallet(CWallet* pWallet)
     pWallet->Lock();
 }
 
-UniValue walletpassdkpcase(const UniValue& params, bool fHelp)
+UniValue walletpassphrase(const UniValue& params, bool fHelp)
 {
     if (pwalletMain->IsCrypted() && (fHelp || params.size() < 2 || params.size() > 3))
         throw runtime_error(
-            "walletpassdkpcase \"passdkpcase\" timeout ( anonymizeonly )\n"
+            "walletpassphrase \"passphrase\" timeout ( anonymizeonly )\n"
             "\nStores the wallet decryption key in memory for 'timeout' seconds.\n"
             "This is needed prior to performing transactions related to private keys such as sending DKPCs\n"
             "\nArguments:\n"
-            "1. \"passdkpcase\"     (string, required) The wallet passdkpcase\n"
+            "1. \"passphrase\"     (string, required) The wallet passphrase\n"
             "2. timeout            (numeric, required) The time to keep the decryption key in seconds.\n"
             "3. anonymizeonly      (boolean, optional, default=flase) If is true sending functions are disabled."
             "\nNote:\n"
-            "Issuing the walletpassdkpcase command while the wallet is already unlocked will set a new unlock\n"
+            "Issuing the walletpassphrase command while the wallet is already unlocked will set a new unlock\n"
             "time that overrides the old one. A timeout of \"0\" unlocks until the wallet is closed.\n"
             "\nExamples:\n"
             "\nUnlock the wallet for 60 seconds\n" +
-            HelpExampleCli("walletpassdkpcase", "\"my pass dkpcase\" 60") +
-            "\nUnlock the wallet for 60 seconds but allow anonymization, automint, and staking only\n" + HelpExampleCli("walletpassdkpcase", "\"my pass dkpcase\" 60 true") +
+            HelpExampleCli("walletpassphrase", "\"my pass phrase\" 60") +
+            "\nUnlock the wallet for 60 seconds but allow anonymization, automint, and staking only\n" + HelpExampleCli("walletpassphrase", "\"my pass phrase\" 60 true") +
             "\nLock the wallet again (before 60 seconds)\n" + HelpExampleCli("walletlock", "") +
-            "\nAs json rpc call\n" + HelpExampleRpc("walletpassdkpcase", "\"my pass dkpcase\", 60"));
+            "\nAs json rpc call\n" + HelpExampleRpc("walletpassphrase", "\"my pass phrase\", 60"));
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
     if (fHelp)
         return true;
     if (!pwalletMain->IsCrypted())
-        throw JSONRPCError(RPC_WALLET_WRONG_ENC_STATE, "Error: running with an unencrypted wallet, but walletpassdkpcase was called.");
+        throw JSONRPCError(RPC_WALLET_WRONG_ENC_STATE, "Error: running with an unencrypted wallet, but walletpassphrase was called.");
 
-    // Note that the walletpassdkpcase is stored in params[0] which is not mlock()ed
+    // Note that the walletpassphrase is stored in params[0] which is not mlock()ed
     SecureString strWalletPass;
     strWalletPass.reserve(100);
     // TODO: get rid of this .c_str() by implementing SecureString::operator=(std::string)
@@ -1841,7 +1841,7 @@ UniValue walletpassdkpcase(const UniValue& params, bool fHelp)
         throw JSONRPCError(RPC_WALLET_ALREADY_UNLOCKED, "Error: Wallet is already unlocked.");
 
     if (!pwalletMain->Unlock(strWalletPass, anonymizeOnly))
-        throw JSONRPCError(RPC_WALLET_PASSDKPCASE_INCORRECT, "Error: The wallet passdkpcase entered was incorrect.");
+        throw JSONRPCError(RPC_WALLET_PASSDKPCASE_INCORRECT, "Error: The wallet passphrase entered was incorrect.");
 
     pwalletMain->TopUpKeyPool();
 
@@ -1858,24 +1858,24 @@ UniValue walletpassdkpcase(const UniValue& params, bool fHelp)
 }
 
 
-UniValue walletpassdkpcasechange(const UniValue& params, bool fHelp)
+UniValue walletpassphrasechange(const UniValue& params, bool fHelp)
 {
     if (pwalletMain->IsCrypted() && (fHelp || params.size() != 2))
         throw runtime_error(
-            "walletpassdkpcasechange \"oldpassdkpcase\" \"newpassdkpcase\"\n"
-            "\nChanges the wallet passdkpcase from 'oldpassdkpcase' to 'newpassdkpcase'.\n"
+            "walletpassphrasechange \"oldpassphrase\" \"newpassphrase\"\n"
+            "\nChanges the wallet passphrase from 'oldpassphrase' to 'newpassphrase'.\n"
             "\nArguments:\n"
-            "1. \"oldpassdkpcase\"      (string) The current passdkpcase\n"
-            "2. \"newpassdkpcase\"      (string) The new passdkpcase\n"
+            "1. \"oldpassphrase\"      (string) The current passphrase\n"
+            "2. \"newpassphrase\"      (string) The new passphrase\n"
             "\nExamples:\n" +
-            HelpExampleCli("walletpassdkpcasechange", "\"old one\" \"new one\"") + HelpExampleRpc("walletpassdkpcasechange", "\"old one\", \"new one\""));
+            HelpExampleCli("walletpassphrasechange", "\"old one\" \"new one\"") + HelpExampleRpc("walletpassphrasechange", "\"old one\", \"new one\""));
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
     if (fHelp)
         return true;
     if (!pwalletMain->IsCrypted())
-        throw JSONRPCError(RPC_WALLET_WRONG_ENC_STATE, "Error: running with an unencrypted wallet, but walletpassdkpcasechange was called.");
+        throw JSONRPCError(RPC_WALLET_WRONG_ENC_STATE, "Error: running with an unencrypted wallet, but walletpassphrasechange was called.");
 
     // TODO: get rid of these .c_str() calls by implementing SecureString::operator=(std::string)
     // Alternately, find a way to make params[0] mlock()'d to begin with.
@@ -1889,11 +1889,11 @@ UniValue walletpassdkpcasechange(const UniValue& params, bool fHelp)
 
     if (strOldWalletPass.length() < 1 || strNewWalletPass.length() < 1)
         throw runtime_error(
-            "walletpassdkpcasechange <oldpassdkpcase> <newpassdkpcase>\n"
-            "Changes the wallet passdkpcase from <oldpassdkpcase> to <newpassdkpcase>.");
+            "walletpassphrasechange <oldpassphrase> <newpassphrase>\n"
+            "Changes the wallet passphrase from <oldpassphrase> to <newpassphrase>.");
 
-    if (!pwalletMain->ChangeWalletPassdkpcase(strOldWalletPass, strNewWalletPass))
-        throw JSONRPCError(RPC_WALLET_PASSDKPCASE_INCORRECT, "Error: The wallet passdkpcase entered was incorrect.");
+    if (!pwalletMain->ChangeWalletPassphrase(strOldWalletPass, strNewWalletPass))
+        throw JSONRPCError(RPC_WALLET_PASSDKPCASE_INCORRECT, "Error: The wallet passphrase entered was incorrect.");
 
     return NullUniValue;
 }
@@ -1905,13 +1905,13 @@ UniValue walletlock(const UniValue& params, bool fHelp)
         throw runtime_error(
             "walletlock\n"
             "\nRemoves the wallet encryption key from memory, locking the wallet.\n"
-            "After calling this method, you will need to call walletpassdkpcase again\n"
+            "After calling this method, you will need to call walletpassphrase again\n"
             "before being able to call any methods which require the wallet to be unlocked.\n"
             "\nExamples:\n"
-            "\nSet the passdkpcase for 2 minutes to perform a transaction\n" +
-            HelpExampleCli("walletpassdkpcase", "\"my pass dkpcase\" 120") +
-            "\nPerform a send (requires passdkpcase set)\n" + HelpExampleCli("sendtoaddress", "\"XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg\" 1.0") +
-            "\nClear the passdkpcase since we are done before 2 minutes is up\n" + HelpExampleCli("walletlock", "") +
+            "\nSet the passphrase for 2 minutes to perform a transaction\n" +
+            HelpExampleCli("walletpassphrase", "\"my pass phrase\" 120") +
+            "\nPerform a send (requires passphrase set)\n" + HelpExampleCli("sendtoaddress", "\"XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg\" 1.0") +
+            "\nClear the passphrase since we are done before 2 minutes is up\n" + HelpExampleCli("walletlock", "") +
             "\nAs json rpc call\n" + HelpExampleRpc("walletlock", ""));
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
@@ -1935,22 +1935,22 @@ UniValue encryptwallet(const UniValue& params, bool fHelp)
 {
     if (!pwalletMain->IsCrypted() && (fHelp || params.size() != 1))
         throw runtime_error(
-            "encryptwallet \"passdkpcase\"\n"
-            "\nEncrypts the wallet with 'passdkpcase'. This is for first time encryption.\n"
+            "encryptwallet \"passphrase\"\n"
+            "\nEncrypts the wallet with 'passphrase'. This is for first time encryption.\n"
             "After this, any calls that interact with private keys such as sending or signing \n"
-            "will require the passdkpcase to be set prior the making these calls.\n"
-            "Use the walletpassdkpcase call for this, and then walletlock call.\n"
-            "If the wallet is already encrypted, use the walletpassdkpcasechange call.\n"
+            "will require the passphrase to be set prior the making these calls.\n"
+            "Use the walletpassphrase call for this, and then walletlock call.\n"
+            "If the wallet is already encrypted, use the walletpassphrasechange call.\n"
             "Note that this will shutdown the server.\n"
             "\nArguments:\n"
-            "1. \"passdkpcase\"    (string) The pass dkpcase to encrypt the wallet with. It must be at least 1 character, but should be long.\n"
+            "1. \"passphrase\"    (string) The pass phrase to encrypt the wallet with. It must be at least 1 character, but should be long.\n"
             "\nExamples:\n"
             "\nEncrypt you wallet\n" +
-            HelpExampleCli("encryptwallet", "\"my pass dkpcase\"") +
-            "\nNow set the passdkpcase to use the wallet, such as for signing or sending DKPCs\n" + HelpExampleCli("walletpassdkpcase", "\"my pass dkpcase\"") +
+            HelpExampleCli("encryptwallet", "\"my pass phrase\"") +
+            "\nNow set the passphrase to use the wallet, such as for signing or sending DKPCs\n" + HelpExampleCli("walletpassphrase", "\"my pass phrase\"") +
             "\nNow we can so something like sign\n" + HelpExampleCli("signmessage", "\"darkpaycoinaddress\" \"test message\"") +
-            "\nNow lock the wallet again by removing the passdkpcase\n" + HelpExampleCli("walletlock", "") +
-            "\nAs a json rpc call\n" + HelpExampleRpc("encryptwallet", "\"my pass dkpcase\""));
+            "\nNow lock the wallet again by removing the passphrase\n" + HelpExampleCli("walletlock", "") +
+            "\nAs a json rpc call\n" + HelpExampleRpc("encryptwallet", "\"my pass phrase\""));
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
@@ -1967,8 +1967,8 @@ UniValue encryptwallet(const UniValue& params, bool fHelp)
 
     if (strWalletPass.length() < 1)
         throw runtime_error(
-            "encryptwallet <passdkpcase>\n"
-            "Encrypts the wallet with <passdkpcase>.");
+            "encryptwallet <passphrase>\n"
+            "Encrypts the wallet with <passphrase>.");
 
     if (!pwalletMain->EncryptWallet(strWalletPass))
         throw JSONRPCError(RPC_WALLET_ENCRYPTION_FAILED, "Error: Failed to encrypt the wallet.");
@@ -2491,7 +2491,7 @@ UniValue multisend(const UniValue& params, bool fHelp)
     if (boost::lexical_cast<int>(params[1].get_str()) < 0)
         throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, expected valid percentage");
     if (pwalletMain->IsLocked())
-        throw JSONRPCError(RPC_WALLET_UNLOCK_NEEDED, "Error: Please enter the wallet passdkpcase with walletpassdkpcase first.");
+        throw JSONRPCError(RPC_WALLET_UNLOCK_NEEDED, "Error: Please enter the wallet passphrase with walletpassphrase first.");
     unsigned int nPercent = boost::lexical_cast<unsigned int>(params[1].get_str());
 
     LOCK(pwalletMain->cs_wallet);
@@ -2531,12 +2531,12 @@ UniValue getzerocoinbalance(const UniValue& params, bool fHelp)
     if (fHelp || params.size() != 0)
         throw runtime_error(
                             "getzerocoinbalance\n"
-                            + HelpRequiringPassdkpcase());
+                            + HelpRequiringPassphrase());
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
     if (pwalletMain->IsLocked())
-        throw JSONRPCError(RPC_WALLET_UNLOCK_NEEDED, "Error: Please enter the wallet passdkpcase with walletpassdkpcase first.");
+        throw JSONRPCError(RPC_WALLET_UNLOCK_NEEDED, "Error: Please enter the wallet passphrase with walletpassphrase first.");
 
     return ValueFromAmount(pwalletMain->GetZerocoinBalance(true));
 
@@ -2547,12 +2547,12 @@ UniValue listmintedzerocoins(const UniValue& params, bool fHelp)
     if (fHelp || params.size() != 0)
         throw runtime_error(
                             "listmintedzerocoins\n"
-                            + HelpRequiringPassdkpcase());
+                            + HelpRequiringPassphrase());
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
     if (pwalletMain->IsLocked())
-        throw JSONRPCError(RPC_WALLET_UNLOCK_NEEDED, "Error: Please enter the wallet passdkpcase with walletpassdkpcase first.");
+        throw JSONRPCError(RPC_WALLET_UNLOCK_NEEDED, "Error: Please enter the wallet passphrase with walletpassphrase first.");
 
     CWalletDB walletdb(pwalletMain->strWalletFile);
     set<CMintMeta> setMints = pwalletMain->zdkpcTracker->ListMints(true, true, true);
@@ -2571,7 +2571,7 @@ UniValue listzerocoinamounts(const UniValue& params, bool fHelp)
     if (fHelp || params.size() != 0)
         throw runtime_error(
             "listzerocoinamounts\n"
-            + HelpRequiringPassdkpcase());
+            + HelpRequiringPassphrase());
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
@@ -2603,7 +2603,7 @@ UniValue listspentzerocoins(const UniValue& params, bool fHelp)
     if (fHelp || params.size() != 0)
         throw runtime_error(
             "listspentzerocoins\n"
-            + HelpRequiringPassdkpcase());
+            + HelpRequiringPassphrase());
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
@@ -2626,7 +2626,7 @@ UniValue mintzerocoin(const UniValue& params, bool fHelp)
         throw runtime_error(
             "mintzerocoin <amount>\n"
             "Usage: Enter an amount of Dkpc to convert to zDkpc"
-            + HelpRequiringPassdkpcase());
+            + HelpRequiringPassphrase());
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
@@ -2676,7 +2676,7 @@ UniValue spendzerocoin(const UniValue& params, bool fHelp)
                     "of checkpoints available. Tip: adding more checkpoints makes the minting process take longer\n"
             "address: Send straight to an address or leave the address blank and the wallet will send to a change address. If there is change then"
                     "an address is required"
-            + HelpRequiringPassdkpcase());
+            + HelpRequiringPassphrase());
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
     
@@ -2765,7 +2765,7 @@ UniValue resetmintzerocoin(const UniValue& params, bool fHelp)
             "Scan the blockchain for all of the zerocoins that are held in the wallet.dat. Update any meta-data that is incorrect.\n"
             "Archive any mints that are not able to be found."
 
-            + HelpRequiringPassdkpcase());
+            + HelpRequiringPassphrase());
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
@@ -2804,7 +2804,7 @@ UniValue resetspentzerocoin(const UniValue& params, bool fHelp)
         throw runtime_error(
             "resetspentzerocoin\n"
                 "Scan the blockchain for all of the zerocoins that are held in the wallet.dat. Reset mints that are considered spent that did not make it into the blockchain."
-            + HelpRequiringPassdkpcase());
+            + HelpRequiringPassphrase());
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
@@ -2854,7 +2854,7 @@ UniValue getarchivedzerocoin(const UniValue& params, bool fHelp)
             "getarchivedzerocoin\n"
             "Display zerocoins that were archived because they were believed to be orphans."
             "Provides enough information to recover mint if it was incorrectly archived."
-            + HelpRequiringPassdkpcase());
+            + HelpRequiringPassphrase());
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
@@ -3128,7 +3128,7 @@ UniValue setzdkpcseed(const UniValue& params, bool fHelp)
         throw runtime_error(
             "setzdkpcseed \"seed\"\n"
             "\nSet the wallet's deterministic zdkpc seed to a specific value.\n" +
-            HelpRequiringPassdkpcase() + "\n"
+            HelpRequiringPassphrase() + "\n"
 
             "\nArguments:\n"
             "1. \"seed\"        (string, required) The deterministic zdkpc seed.\n"
@@ -3162,7 +3162,7 @@ UniValue getzdkpcseed(const UniValue& params, bool fHelp)
         throw runtime_error(
             "getzdkpcseed\n"
             "\nCheck archived zDKPC list to see if any mints were added to the blockchain.\n" +
-            HelpRequiringPassdkpcase() + "\n"
+            HelpRequiringPassphrase() + "\n"
 
             "\nResult\n"
             "\"seed\" : s,  (string) The deterministic zDKPC seed.\n"
@@ -3187,7 +3187,7 @@ UniValue generatemintlist(const UniValue& params, bool fHelp)
         throw runtime_error(
             "generatemintlist\n"
             "\nShow mints that are derived from the deterministic zDKPC seed.\n" +
-            HelpRequiringPassdkpcase() + "\n"
+            HelpRequiringPassphrase() + "\n"
 
             "\nArguments\n"
             "1. \"count\"  : n,  (numeric) Which sequential zDKPC to start with.\n"
@@ -3235,7 +3235,7 @@ UniValue dzdkpcstate(const UniValue& params, bool fHelp) {
         throw runtime_error(
                 "dzdkpcstate\n"
                         "\nThe current state of the mintpool of the deterministic zDKPC wallet.\n" +
-                HelpRequiringPassdkpcase() + "\n"
+                HelpRequiringPassphrase() + "\n"
 
                         "\nExamples\n" +
                 HelpExampleCli("mintpoolstatus", "") + HelpExampleRpc("mintpoolstatus", ""));
@@ -3287,7 +3287,7 @@ UniValue searchdzdkpc(const UniValue& params, bool fHelp)
         throw runtime_error(
             "searchdzdkpc\n"
             "\nMake an extended search for deterministically generated zDKPC that have not yet been recognized by the wallet.\n" +
-            HelpRequiringPassdkpcase() + "\n"
+            HelpRequiringPassphrase() + "\n"
 
             "\nArguments\n"
             "1. \"count\"       (numeric) Which sequential zDKPC to start with.\n"

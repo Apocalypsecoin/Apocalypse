@@ -114,21 +114,21 @@
     </message>
 </context>
 <context>
-    <name>AskPassdkpcaseDialog</name>
+    <name>AskPassphraseDialog</name>
     <message>
-        <source>Passdkpcase Dialog</source>
+        <source>Passphrase Dialog</source>
         <translation>Diálogo de contraseña</translation>
     </message>
     <message>
-        <source>Enter passdkpcase</source>
+        <source>Enter passphrase</source>
         <translation>Introduzca la contraseña</translation>
     </message>
     <message>
-        <source>New passdkpcase</source>
+        <source>New passphrase</source>
         <translation>Nueva contraseña</translation>
     </message>
     <message>
-        <source>Repeat new passdkpcase</source>
+        <source>Repeat new passphrase</source>
         <translation>Repetir nueva contraseña</translation>
     </message>
     <message>
@@ -140,7 +140,7 @@
         <translation>Desbloquear solo para anonimización y staking</translation>
     </message>
     <message>
-        <source>Enter the new passdkpcase to the wallet.&lt;br/&gt;Please use a passdkpcase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
+        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
         <translation>Escriba la nueva contraseña para la Wallet. &lt;br/&gt;Por favor utilice una contraseña de &lt;b&gt;10 o más caracteres aleatorios&lt;/b&gt;, u &lt;b&gt; ocho o más palabras&lt;/b&gt;</translation>
     </message>
     <message>
@@ -148,7 +148,7 @@
         <translation>Cifrar monedero</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passdkpcase to unlock the wallet.</source>
+        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
         <translation>Esta operación requiere su contraseña para desbloquear el monedero</translation>
     </message>
     <message>
@@ -156,7 +156,7 @@
         <translation>Desbloquear monedero</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passdkpcase to decrypt the wallet.</source>
+        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
         <translation>Esta operación requiere su contraseña para descifrar el monedero</translation>
     </message>
     <message>
@@ -164,11 +164,11 @@
         <translation>Descifrar monedero</translation>
     </message>
     <message>
-        <source>Change passdkpcase</source>
+        <source>Change passphrase</source>
         <translation>Cambiar contraseña</translation>
     </message>
     <message>
-        <source>Enter the old and new passdkpcase to the wallet.</source>
+        <source>Enter the old and new passphrase to the wallet.</source>
         <translation>Ingrese la antigua y la nueva contraseña para el monedero</translation>
     </message>
     <message>
@@ -184,7 +184,7 @@
         <translation>¿Está seguro de que desea cifrar su monedero?</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passdkpcase, you will &lt;b&gt;LOSE ALL OF YOUR DKPC&lt;/b&gt;!</source>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR DKPC&lt;/b&gt;!</source>
         <translation>Atención: Si cifra su monedero y pierde su contraseña, perderá &lt;b&gt; TODOS SUS DKPC&lt;/b&gt;!</translation>
     </message>
     <message>
@@ -204,7 +204,7 @@
         <translation>El cifrado del monedero ha fallado debido a un error interno. Su monedero no ha sido cifrado.</translation>
     </message>
     <message>
-        <source>The supplied passdkpcases do not match.</source>
+        <source>The supplied passphrases do not match.</source>
         <translation>Las contraseñas introducidas no coinciden.</translation>
     </message>
     <message>
@@ -212,7 +212,7 @@
         <translation>Desbloqueo del monedero fallido</translation>
     </message>
     <message>
-        <source>The passdkpcase entered for the wallet decryption was incorrect.</source>
+        <source>The passphrase entered for the wallet decryption was incorrect.</source>
         <translation>La contraseña introducida para el descifrado del monedero es incorrecta.</translation>
     </message>
     <message>
@@ -220,7 +220,7 @@
         <translation>Descifrado del monedero fallido</translation>
     </message>
     <message>
-        <source>Wallet passdkpcase was successfully changed.</source>
+        <source>Wallet passphrase was successfully changed.</source>
         <translation>Se cambió la contraseña con éxito.</translation>
     </message>
     <message>
@@ -239,7 +239,7 @@
         <translation>&amp;Cifrado BIP 38</translation>
     </message>
     <message>
-        <source>Enter a DarkPayCoin Address that you would like to encrypt using BIP 38. Enter a passdkpcase in the middle box. Press encrypt to compute the encrypted private key.</source>
+        <source>Enter a DarkPayCoin Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
         <translation>Introduzca la dirección DarkPayCoin que querría cifrar usando BIP 38. Introduzca una contraseña en el campo central. Haga clic en cifrar para generar la clave privada cifrada.</translation>
     </message>
     <message>
@@ -267,7 +267,7 @@
         <translation>Alt + P</translation>
     </message>
     <message>
-        <source>Passdkpcase: </source>
+        <source>Passphrase: </source>
         <translation>Contraseña:</translation>
     </message>
     <message>
@@ -299,7 +299,7 @@
         <translation>&amp;Descifrado BIP 38</translation>
     </message>
     <message>
-        <source>Enter the BIP 38 encrypted private key. Enter the passdkpcase in the middle box. Click Decrypt Key to compute the private key. After the key is decrypted, clicking 'Import Address' will add this private key to the wallet.</source>
+        <source>Enter the BIP 38 encrypted private key. Enter the passphrase in the middle box. Click Decrypt Key to compute the private key. After the key is decrypted, clicking 'Import Address' will add this private key to the wallet.</source>
         <translation>Introduzca la clave cifrada privada BIP 38. Introduzca la contraseña en el campo central. Haga clic en descifrar clave para generar la clave privada. Después de que la clave sea descifrada, pulsando en 'Importar dirección' añadirá esta clave privada al monedero.</translation>
     </message>
     <message>
@@ -331,7 +331,7 @@
         <translation>Haga clic en "Descifrar clave" para generar la clave</translation>
     </message>
     <message>
-        <source>The entered passdkpcase is invalid. </source>
+        <source>The entered passphrase is invalid. </source>
         <translation>La contraseña introducida es inválida</translation>
     </message>
     <message>
@@ -363,7 +363,7 @@
         <translation>Falló el descifrado</translation>
     </message>
     <message>
-        <source>Please check the key and passdkpcase and try again.</source>
+        <source>Please check the key and passphrase and try again.</source>
         <translation>Por favor compruebe la clave y la contraseña e inténtelo de nuevo.</translation>
     </message>
     <message>
@@ -470,11 +470,11 @@
         <translation>Copia de seguridad de la wallet a otra ubicación</translation>
     </message>
     <message>
-        <source>&amp;Change Passdkpcase...</source>
+        <source>&amp;Change Passphrase...</source>
         <translation>&amp;Cambiar contraseña...</translation>
     </message>
     <message>
-        <source>Change the passdkpcase used for wallet encryption</source>
+        <source>Change the passphrase used for wallet encryption</source>
         <translation>Cambiar contraseña usada para la encriptación de la wallet</translation>
     </message>
     <message>
@@ -654,7 +654,7 @@
         <translation>&amp;Herramienta BIP38</translation>
     </message>
     <message>
-        <source>Encrypt and decrypt private keys using a passdkpcase</source>
+        <source>Encrypt and decrypt private keys using a passphrase</source>
         <translation>Encriptar y desencriptar las llaves privadas usando una contraseña</translation>
     </message>
     <message>
@@ -2384,7 +2384,7 @@ https://www.transifex.com/darkpaycoin-project/darkpaycoin-project-translations</
         <translation>La funcionalidad Zerocoin todavía no está habilitada en la red DarkPayCoin.</translation>
     </message>
     <message>
-        <source>Error: Your wallet is locked. Please enter the wallet passdkpcase first.</source>
+        <source>Error: Your wallet is locked. Please enter the wallet passphrase first.</source>
         <translation>Error: Tu monedero está bloqueado. Por favor, primero introduzca la clave de desbloqueo.</translation>
     </message>
     <message>

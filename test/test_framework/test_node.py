@@ -237,12 +237,12 @@ class TestNode():
                     assert_msg = "darkpaycoind should have exited with expected error " + expected_msg
                 raise AssertionError(assert_msg)
 
-    def node_encrypt_wallet(self, passdkpcase):
+    def node_encrypt_wallet(self, passphrase):
         """"Encrypts the wallet.
 
         This causes darkpaycoind to shutdown, so this method takes
         care of cleaning up resources."""
-        self.encryptwallet(passdkpcase)
+        self.encryptwallet(passphrase)
         self.wait_until_stopped()
 
     def add_p2p_connection(self, p2p_conn, *args, **kwargs):

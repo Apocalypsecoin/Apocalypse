@@ -10,7 +10,7 @@
 /* Milliseconds between model updates */
 static const int MODEL_UPDATE_DELAY = 1000;
 
-/* AskPassdkpcaseDialog -- Maximum passdkpcase length */
+/* AskPassphraseDialog -- Maximum passphrase length */
 static const int MAX_PASSDKPCASE_SIZE = 1024;
 
 /* DarkPayCoin GUI -- Size of icons in status bar */

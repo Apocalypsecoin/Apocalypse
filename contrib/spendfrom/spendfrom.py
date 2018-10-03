@@ -88,10 +88,10 @@ def unlock_wallet(darkpaycoind):
     t = int(info['unlocked_until'])
     if t <= time.time():
         try:
-            passdkpcase = getpass.getpass("Wallet is locked; enter passdkpcase: ")
-            darkpaycoind.walletpassdkpcase(passdkpcase, 5)
+            passphrase = getpass.getpass("Wallet is locked; enter passphrase: ")
+            darkpaycoind.walletpassphrase(passphrase, 5)
         except:
-            sys.stderr.write("Wrong passdkpcase\n")
+            sys.stderr.write("Wrong passphrase\n")
 
     info = darkpaycoind.getinfo()
     return int(info['unlocked_until']) > time.time()
@@ -254,7 +254,7 @@ def main():
         fee = Decimal(options.fee)
         amount = Decimal(options.amount)
         while unlock_wallet(darkpaycoind) == False:
-            pass # Keep asking for passdkpcase until they get it right
+            pass # Keep asking for passphrase until they get it right
         txdata = create_tx(darkpaycoind, options.fromaddresses.split(","), options.to, amount, fee)
         sanity_test_fee(darkpaycoind, txdata, amount*Decimal("0.01"))
         if options.dry_run:

@@ -9,7 +9,7 @@ class ObfuscationConfig;
 }
 class WalletModel;
 
-/** Multifunctional dialog to ask for passdkpcases. Used for encryption, unlocking, and changing the passdkpcase.
+/** Multifunctional dialog to ask for passphrases. Used for encryption, unlocking, and changing the passphrase.
  */
 class ObfuscationConfig : public QDialog
 {
