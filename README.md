@@ -24,7 +24,7 @@ Supply Cap: 21,000,000
 
 Premine: 21000 (0.1%)
 
-Masternode collateral: 1000
+Masternode collateral: 10000
 
 Masternode Rewards: 90%
 
